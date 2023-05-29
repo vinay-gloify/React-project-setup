@@ -1,0 +1,1 @@
+// Put all variable here then use throughout the app  for converting text all over wether its an complete language or something else with help of react-localization package
