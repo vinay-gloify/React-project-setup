@@ -15,7 +15,7 @@ const axiosClient = axios.create({
 
 
 //All request will wait 2 seconds before timeout
-axiosClient.defaults.timeout = 2000;
+axiosClient.defaults.timeout = 3000;
 
 
 //axios request used to modify data before sending
@@ -53,12 +53,24 @@ export function getRequest(URL) {
   return axiosClient.get(`/${URL}`).then(response => response);
 }
 
-export function postRequest(URL, payload) {
-  return axiosClient.post(`/${URL}`, payload).then(response => response);
+export function postRequest(URL, payload, setProgress) {
+  const config = {
+    onUploadProgress: progressEvent => {
+      const percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+      setProgress(percentCompleted);
+    }
+  };
+  return axiosClient.post(`/${URL}`, payload, config).then(response => response);
 }
 
-export function putRequest(URL, payload) {
-  return axiosClient.put(`/${URL}`, payload).then(response => response);
+export function putRequest(URL, payload, setProgress) {
+  const config = {
+    onUploadProgress: progressEvent => {
+      const percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+      setProgress(percentCompleted);
+    }
+  };
+  return axiosClient.put(`/${URL}`, payload, config).then(response => response);
 }
 
 export function deleteRequest(URL) {
