@@ -19,11 +19,11 @@ axiosClient.defaults.timeout = 3000;
 
 
 //axios request used to modify data before sending
-axios.interceptors.request.use(
+axiosClient.interceptors.request.use(
   function (request) {
     //we can add as per requirement like this
     alert('test');
-    request.headers['Content-Type'] = 'multipart/form-data';
+    // request.headers['Content-Type'] = 'multipart/form-data';
     request.headers.channelName = 'React Project Setup'
     return request;
 },function (error) {
